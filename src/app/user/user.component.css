@@ -1,0 +1,93 @@
+.main{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    color: white;
+    margin-top: 5px;
+    
+}
+.main h1{
+    color: black;
+    font-size: 30px;
+    font-style: italic;
+    background-color: white;
+    width: 400px
+
+}
+.userData{
+  border-radius: 5px;
+  border-color: black;
+  border-style: inset;
+  width: 400px;
+  background-color:#98ACF8;
+  display: flex;
+ flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.user{
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    border-color: white;
+    border-style:solid;
+    width: 70%;
+    margin-top: 18px;
+    margin-bottom: 10px;
+    height: 90px;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.createUser{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 400px;
+    background-color: #82C3EC;
+    border-radius: 5px;
+    border-color: black;
+    border-style: solid;
+    margin-left: 5px;
+
+}
+.createUser input{
+    width: 260px;
+    height: 80px;
+    margin-top: 20px;
+    border-radius: 15px;    
+    border-color: #98ACF8;
+    border-style: solid;
+    margin-left: 20px;
+}
+.createUser input::placeholder{ 
+    font-size: 17px;
+    font-style: bold;
+    color : #98ACF8;
+}
+.createUser input[type="text"]{
+     font-size: 17px;
+     color: #98ACF8;
+}
+.createUser input[type="submit"]{
+    font-size: 17px;
+    color: #98ACF8;
+    background-color: white;
+}
+.createUser select{
+    width: 260px;
+    height: 80px;
+    margin-top: 20px;
+    border-radius: 15px;
+    margin-left: 20px;
+}
+
+.userForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

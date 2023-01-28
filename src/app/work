@@ -1,0 +1,99 @@
+// create a get request for data inside applications.
+import { Application } from './../models/application';
+import { FetchResponse } from '../types/fetch.type';
+import { fetch } from './fetch';
+import { Injectable } from '@angular/core';
+
+@Injectable({
+	providedIn: 'root',
+})
+export class ApplicationService {
+	getApplications(): Promise<FetchResponse<Application[]>> {
+		return fetch<Application[]>('get', '/apps');
+	}
+}
+
+
+getApplicationData(key: any): Promise < FetchResponse < Application[] >> {
+    return fetch<Application[]>('get', '/apps/of/app/' + key);
+}
+/// card
+
+
+import { Component, ElementRef, Input, ViewChild, OnInit } from '@angular/core';
+import { Application } from '../../models/application';
+import { SdxDialogContentStubComponent } from '../sdx-stubs';
+import { ApplicationService } from '../../services/application.service';
+
+/** The Application Card Component displays one card on the StartComponent. */
+@Component({
+	selector: 'app-application-card',
+	templateUrl: './application-card.component.html',
+	styleUrls: ['./application-card.component.scss'],
+})
+export class ApplicationCardComponent implements OnInit {
+	applicationData: Application[] = [];
+	constructor(private applicationService: ApplicationService) {}
+
+	/** The application object */
+	@Input() application!: Application;
+
+	@ViewChild('modal')
+	modal!: ElementRef<SdxDialogContentStubComponent>;
+
+	value: any;
+
+	async ngOnInit() {
+		this.value = this.application.abbreviation.toLowerCase();
+	}
+	async loadApplicationData(): Promise<void> {
+		const { data: applications } = await this.applicationService.getApplicationData(this.value);
+		this.applicationData = applications;
+	}
+}
+
+
+// start 
+
+import { Component, OnInit } from '@angular/core';
+import { ModeService } from '../../../assets/styles/mode.service';
+import { AppComponent } from '../../app.component';
+import { ApplicationService } from '../../services/application.service';
+import { Application } from '../../models/application';
+
+/** Start Component displaying links to the different applications using NewsRoom
+ *
+ * Currently statically implemented
+ */
+@Component({
+	selector: 'app-start',
+	templateUrl: './start.component.html',
+	styleUrls: ['./start.component.scss'],
+})
+export class StartComponent implements OnInit {
+	/** Array with applications (is being iterated over in the template)  */
+
+	applications: Application[] = [];
+
+	constructor(
+		public app: AppComponent,
+		private modeService: ModeService,
+		private applicationService: ApplicationService,
+	) {}
+
+	async ngOnInit(): Promise<void> {
+		// By default, the starting application uses the default light mode
+		this.modeService.setActiveMode('light', 'none');
+		await this.loadApplications();
+	}
+	// this function loads all the application available.
+	async loadApplications(): Promise<void> {
+		const { data: applications } = await this.applicationService.getApplications();
+		this.applications = applications;
+	}
+}
+
+
+this.applicationService.appDataObservable$.subscribe((applications) => {
+	console.log(applications);
+});
