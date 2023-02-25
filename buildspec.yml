@@ -3,10 +3,11 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - npm install --force
+      - npm init
       - npm install -g @angular/cli
   build:
     commands:
+      - npm install 
       - npm run build:ci
 
 
