@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
+  title = 'practice';
   constructor() {}
 
   ngOnInit(): void {}

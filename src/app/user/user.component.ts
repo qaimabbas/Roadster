@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { User } from '../types/user';
 import {
@@ -7,17 +7,21 @@ import {
   FormGroup,
   FormControl,
 } from '@angular/forms';
+
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css'],
 })
-export class UserComponent implements OnInit {
+export class UserComponent implements OnInit, OnChanges {
   constructor(public userService: UserService) {}
   public users: User[] = [];
   user;
 
   ngOnInit(): void {
+    this.showUsers();
+  }
+  ngOnChanges(): void {
     this.showUsers();
   }
   showUsers() {
@@ -43,6 +47,5 @@ export class UserComponent implements OnInit {
         role: response.role,
       });
     });
-    this.showUsers();
   }
 }
